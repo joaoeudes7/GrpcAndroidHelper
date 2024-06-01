@@ -2,21 +2,7 @@ plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     `maven-publish`
-}
-
-publishing {
-    publications {
-        create<MavenPublication>("release") {
-            from(components.findByName("release"))
-            groupId = "com.github.joaoeudes7"
-            artifactId = "grpc.android.helper"
-            version = "1.0.0"
-        }
-    }
-
-    repositories {
-        mavenLocal()
-    }
+    `ivy-publish`
 }
 
 android {
@@ -32,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -45,6 +31,36 @@ android {
     }
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
+    }
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            val organizationGroup = "com.github.joaoeudes7"
+            val artifactIdPkg = "grpc-android-helper"
+            val versionPkg = "1.0.4"
+
+            create<MavenPublication>("maven") {
+                groupId = organizationGroup
+                artifactId = artifactIdPkg
+                version = versionPkg
+
+                from(components.findByName("release"))
+            }
+
+            create<IvyPublication>("ivy") {
+                organisation = organizationGroup
+                module = artifactIdPkg
+                revision = versionPkg
+
+                from(components.findByName("release"))
+            }
+        }
+
+        repositories {
+            mavenLocal()
+        }
     }
 }
 
