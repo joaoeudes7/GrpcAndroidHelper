@@ -1,5 +1,8 @@
-package com.jedev.grpc.kt.helper
+@file:Suppress("unused")
 
+package com.github.joaoeudes7.grpc.android.helper
+
+import com.github.joaoeudes7.grpc.android.helper.extensions.withAuthToken
 import io.grpc.*
 import io.grpc.kotlin.*
 import javax.net.ssl.SSLSocketFactory
@@ -15,7 +18,7 @@ sealed class GrpcClient<S : AbstractCoroutineStub<S>> {
     ) : GrpcClient<S>() {
 
         final override val defaultManagedChannel: ManagedChannel by lazy {
-            ChannelGrpcUtils.createDefaultChannelConfig(targetUrl).usePlaintext().build()
+            ChannelGrpcBaseBuilders.createDefaultChannelConfig(targetUrl).usePlaintext().build()
         }
 
         final override val stub: S by lazy {
@@ -29,7 +32,7 @@ sealed class GrpcClient<S : AbstractCoroutineStub<S>> {
         sslCredentialsFiles: SSLSocketFactory
     ) : GrpcClient<S>() {
         final override val defaultManagedChannel: ManagedChannel by lazy {
-            ChannelGrpcUtils.createChannelSecure(
+            ChannelGrpcBaseBuilders.createChannelSecure(
                 targetUrl,
                 sslCredentialsFiles
             ).build()

@@ -1,10 +1,26 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    `maven-publish`
+}
+
+publishing {
+    publications {
+        create<MavenPublication>("release") {
+            from(components.findByName("release"))
+            groupId = "com.github.joaoeudes7"
+            artifactId = "grpc.android.helper"
+            version = "1.0.0"
+        }
+    }
+
+    repositories {
+        mavenLocal()
+    }
 }
 
 android {
-    namespace = "com.jedev.grpc.kt.helper"
+    namespace = "com.github.joaoeudes7.grpc.android.helper"
     compileSdk = 34
 
     defaultConfig {

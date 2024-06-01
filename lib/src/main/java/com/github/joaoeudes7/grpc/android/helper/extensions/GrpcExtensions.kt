@@ -1,4 +1,6 @@
-package com.jedev.grpc.kt.helper
+@file:Suppress("unused")
+
+package com.github.joaoeudes7.grpc.android.helper.extensions
 
 import com.github.ajalt.timberkt.*
 import io.grpc.*

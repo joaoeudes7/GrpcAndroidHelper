@@ -1,4 +1,4 @@
-package com.jedev.grpc.kt.helper
+package com.github.joaoeudes7.grpc.android.helper.logging
 
 import io.grpc.*
 import timber.log.Timber

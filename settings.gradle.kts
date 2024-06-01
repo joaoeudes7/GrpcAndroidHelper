@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "GrpcKtHelper"
 include(":app")
-include(":grpcKtHelper")
+include(":lib")

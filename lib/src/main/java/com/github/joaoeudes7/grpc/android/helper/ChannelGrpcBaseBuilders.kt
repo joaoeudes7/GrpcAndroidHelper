@@ -1,15 +1,16 @@
 @file:Suppress("unused")
 
-package com.jedev.grpc.kt.helper
+package com.github.joaoeudes7.grpc.android.helper
 
 import android.content.*
+import com.github.joaoeudes7.grpc.android.helper.logging.ClientGrpcLogInterceptor
 import io.grpc.android.*
 import io.grpc.okhttp.*
 import kotlinx.coroutines.*
 import java.util.concurrent.*
 import javax.net.ssl.*
 
-object ChannelGrpcUtils {
+object ChannelGrpcBaseBuilders {
     private val intercept = ClientGrpcLogInterceptor()
 
     fun createDefaultChannelConfig(
