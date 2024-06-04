@@ -18,7 +18,7 @@ android {
 
     buildTypes {
         release {
-            isMinifyEnabled = true
+            isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -39,7 +39,7 @@ afterEvaluate {
         publications {
             val organizationGroup = "com.github.joaoeudes7"
             val artifactIdPkg = "grpc-android-helper"
-            val versionPkg = "1.0.4"
+            val versionPkg = "1.0.5"
 
             create<MavenPublication>("maven") {
                 groupId = organizationGroup
