@@ -31,9 +31,22 @@ object ChannelGrpcBaseBuilders {
         target: String,
         sslSocketFactory: SSLSocketFactory,
         coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
-    ): OkHttpChannelBuilder = createDefaultChannelConfig(target, coroutineDispatcher)
+    ): OkHttpChannelBuilder = createDefaultChannelConfig(
+        target,
+        coroutineDispatcher
+    )
         .useTransportSecurity()
         .sslSocketFactory(sslSocketFactory)
+
+
+    fun createChannelSecure(
+        target: String,
+        coroutineDispatcher: CoroutineDispatcher = Dispatchers.IO
+    ): OkHttpChannelBuilder =
+        createDefaultChannelConfig(
+            target,
+            coroutineDispatcher
+        ).useTransportSecurity()
 
     fun createDefaultChannelPlainText(
         context: Context,

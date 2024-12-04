@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.github.joaoeudes7.grpc.android.helper"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         minSdk = 24
@@ -39,7 +39,7 @@ afterEvaluate {
         publications {
             val organizationGroup = "com.github.joaoeudes7"
             val artifactIdPkg = "grpc-android-helper"
-            val versionPkg = "1.0.5"
+            val versionPkg = "1.0.6"
 
             create<MavenPublication>("maven") {
                 groupId = organizationGroup

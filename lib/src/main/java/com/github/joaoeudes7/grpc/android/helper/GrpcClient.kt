@@ -5,6 +5,7 @@ package com.github.joaoeudes7.grpc.android.helper
 import com.github.joaoeudes7.grpc.android.helper.extensions.withAuthToken
 import io.grpc.*
 import io.grpc.kotlin.*
+import io.grpc.okhttp.OkHttpChannelBuilder
 import javax.net.ssl.SSLSocketFactory
 
 sealed class GrpcClient<S : AbstractCoroutineStub<S>> {
@@ -14,11 +15,31 @@ sealed class GrpcClient<S : AbstractCoroutineStub<S>> {
 
     open class Grpc<S : AbstractCoroutineStub<S>>(
         targetUrl: String,
+        channelConfig: OkHttpChannelBuilder.() -> OkHttpChannelBuilder,
         stubStart: (ManagedChannel) -> S
     ) : GrpcClient<S>() {
 
         final override val defaultManagedChannel: ManagedChannel by lazy {
-            ChannelGrpcBaseBuilders.createDefaultChannelConfig(targetUrl).usePlaintext().build()
+            ChannelGrpcBaseBuilders.createDefaultChannelConfig(targetUrl)
+                .apply { channelConfig() }
+                .build()
+        }
+
+        final override val stub: S by lazy {
+            stubStart(defaultManagedChannel)
+        }
+    }
+
+    open class GrpcSecureSSL<S : AbstractCoroutineStub<S>>(
+        targetUrl: String,
+        stubStart: (ManagedChannel) -> S,
+        sslCredentialsFiles: SSLSocketFactory
+    ) : GrpcClient<S>() {
+        final override val defaultManagedChannel: ManagedChannel by lazy {
+            ChannelGrpcBaseBuilders.createChannelSecure(
+                targetUrl,
+                sslCredentialsFiles
+            ).build()
         }
 
         final override val stub: S by lazy {
@@ -29,12 +50,10 @@ sealed class GrpcClient<S : AbstractCoroutineStub<S>> {
     open class GrpcSecure<S : AbstractCoroutineStub<S>>(
         targetUrl: String,
         stubStart: (ManagedChannel) -> S,
-        sslCredentialsFiles: SSLSocketFactory
     ) : GrpcClient<S>() {
         final override val defaultManagedChannel: ManagedChannel by lazy {
             ChannelGrpcBaseBuilders.createChannelSecure(
                 targetUrl,
-                sslCredentialsFiles
             ).build()
         }
 
