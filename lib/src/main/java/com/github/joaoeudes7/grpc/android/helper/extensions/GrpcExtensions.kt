@@ -7,7 +7,7 @@ import io.grpc.*
 import io.grpc.kotlin.AbstractCoroutineStub
 import io.grpc.stub.MetadataUtils
 
-private fun Metadata.put(key: String, value: String) {
+fun Metadata.put(key: String, value: String) {
     val metaKey = Metadata.Key.of(key, Metadata.ASCII_STRING_MARSHALLER)
 
     return put(metaKey, value)
@@ -24,15 +24,18 @@ fun <T : AbstractCoroutineStub<T>> T.addOption(
 ): T = withOption(CallOptions.Key.create(key), value)
 
 fun <T : AbstractCoroutineStub<T>> T.withAuthToken(
-    token: String
-): T = addOption("authorization", token).also {
+    token: String,
+    headerKey: String = "Authorization"
+): T = addOption(headerKey, token).also {
     Timber.d { "Auth token: $token" }
 }
 
 fun <T : AbstractCoroutineStub<T>> T.withClientOrigin(
-    origin: String = "Android"
-): T = addMetaData("ClientOrigin", origin)
+    origin: String = "Android",
+    headerKey: String = "ClientOrigin"
+): T = addMetaData(headerKey, origin)
 
 fun <T : AbstractCoroutineStub<T>> T.withTotpCode(
-    totp: String
-): T = addOption("FactorTotp", totp)
+    totp: String,
+    headerKey: String = "FactorTotp"
+): T = addOption(headerKey, totp)
