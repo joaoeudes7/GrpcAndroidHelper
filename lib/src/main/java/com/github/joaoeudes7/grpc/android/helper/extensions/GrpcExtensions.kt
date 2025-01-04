@@ -26,7 +26,7 @@ fun <T : AbstractCoroutineStub<T>> T.addOption(
 fun <T : AbstractCoroutineStub<T>> T.withAuthToken(
     token: String,
     headerKey: String = "Authorization"
-): T = addOption(headerKey, token).also {
+): T = addMetaData(headerKey, token).also {
     Timber.d { "Auth token: $token" }
 }
 

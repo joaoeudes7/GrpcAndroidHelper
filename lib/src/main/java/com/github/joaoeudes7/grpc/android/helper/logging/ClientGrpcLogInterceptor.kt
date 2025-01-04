@@ -30,6 +30,7 @@ class ClientGrpcLogInterceptor : ClientInterceptor {
       ) {
         override fun onMessage(message: RespT) {
           Timber.i("⚡ GRPC Response: ${method!!.fullMethodName}}")
+          Timber.i("⚡ GRPC Headers: ${headers}}")
 
           super.onMessage(message)
         }
