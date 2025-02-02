@@ -39,7 +39,7 @@ afterEvaluate {
         publications {
             val organizationGroup = "com.github.joaoeudes7"
             val artifactIdPkg = "grpc-android-helper"
-            val versionPkg = "1.0.8"
+            val versionPkg = "1.0.9"
 
             create<MavenPublication>("maven") {
                 groupId = organizationGroup
