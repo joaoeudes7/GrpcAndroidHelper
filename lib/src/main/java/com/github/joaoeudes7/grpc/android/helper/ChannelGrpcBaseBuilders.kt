@@ -19,9 +19,6 @@ object ChannelGrpcBaseBuilders {
     ): OkHttpChannelBuilder = OkHttpChannelBuilder
         .forTarget(target)
         .executor(coroutineDispatcher.asExecutor())
-        .enableRetry()
-        .maxRetryAttempts(4)
-        .hostnameVerifier { _, _ -> true }
         .keepAliveTime(1, TimeUnit.MINUTES)
         .keepAliveTimeout(1, TimeUnit.MINUTES)
         .maxInboundMessageSize(1024 * 1024 * 10)

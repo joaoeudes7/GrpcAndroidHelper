@@ -17,12 +17,12 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 
 timberkt = "com.github.ajalt:timberkt:1.5.1"
-protobuf-javalite = "com.google.protobuf:protobuf-javalite:4.29.2"
-grpc-protobuf-lite = "io.grpc:grpc-protobuf-lite:1.69.0"
+protobuf-javalite = "com.google.protobuf:protobuf-javalite:4.29.3"
+grpc-protobuf-lite = "io.grpc:grpc-protobuf-lite:1.70.0"
 grpc-kotlin-stub = "io.grpc:grpc-kotlin-stub:1.4.1"
-grpc-stub = "io.grpc:grpc-stub:1.69.0"
-grpc-android = "io.grpc:grpc-android:1.69.0"
-grpc-okhttp = "io.grpc:grpc-okhttp:1.69.0"
+grpc-stub = "io.grpc:grpc-stub:1.70.0"
+grpc-android = "io.grpc:grpc-android:1.70.0"
+grpc-okhttp = "io.grpc:grpc-okhttp:1.70.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
