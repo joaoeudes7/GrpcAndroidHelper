@@ -37,6 +37,7 @@ android {
 afterEvaluate {
     publishing {
         publications {
+            // https://jitpack.io/#joaoeudes7/GrpcAndroidHelper
             val organizationGroup = "com.github.joaoeudes7"
             val artifactIdPkg = "grpc-android-helper"
             val versionPkg = "1.0.9"
